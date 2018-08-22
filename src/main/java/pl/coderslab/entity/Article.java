@@ -1,6 +1,7 @@
 package pl.coderslab.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,15 +30,14 @@ public class Article {
     @Column(name = "title", length = 200)
     private String title;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 	    CascadeType.REFRESH })
-    @JoinColumn(name="author_id")
+    @JoinColumn(name = "author_id")
     private Author author;
-    
-    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 	    CascadeType.REFRESH })
-    @JoinColumn(name="category_id")
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
     @Column(name = "content")
     private String content;
 
@@ -109,16 +111,8 @@ public class Article {
 		+ ", content=" + content + ", created=" + created + ", updated=" + updated + "]";
     }
 
+    public void addCategory(Category category) {
+	categories.add(category);
+    }
+
 }
-// #### Zadanie 3
-//
-// 1. Utwórz model `Article`, który będzie przechowywał dane nt. artykułów w
-// CMS-ie. Model powinien mieć następujące pola:
-// - title (max. 200 znaków),
-// - author - (powiązanie relacją do klasy `Author`) - artykuł może mieć tylko
-// jednego autora
-// - category - (powiązanie relacją do klasy `Author`) - artykuł może należeć do
-// wielu kategorii
-// - content
-// - created (wartość ma być automatycznie dodawana podczas zapisu)
-// - updated (wartość ma być automatycznie zmieniana podczas edycji).

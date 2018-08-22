@@ -1,6 +1,5 @@
 package pl.coderslab.DAO;
 
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -36,12 +35,18 @@ public class ArticleDAO {
     public void deleteArticle(Article article) {
 	entityManager.remove(entityManager.contains(article) ? article : entityManager.merge(article));
     }
-    
-    public List<Article> getAticleList(Long id) {
+
+    public List<Article> getAticleListByCategory(Long id) {
 	Query query = entityManager.createQuery(" SELECT a FROM Article a JOIN a.categories c WHERE c.id =:id");
 	query.setParameter("id", id);
 	List<Article> books = query.getResultList();
-	
 	return books;
-}
+
+    }
+
+    public List<Article> getArticleList() {
+	Query query = entityManager.createQuery(" SELECT a FROM Article a order by a.created desc");
+	List<Article> books = query.getResultList();
+	return books;
+    }
 }

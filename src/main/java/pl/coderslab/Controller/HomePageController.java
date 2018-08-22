@@ -40,7 +40,7 @@ public class HomePageController {
     @GetMapping("/articles/{id}")
     @ResponseBody
     public String getArticlesList(@PathVariable("id")Long id) {
-	service.getListByCategory(id).stream().forEach(System.out::println);
+	service.getList().stream().forEach(System.out::println);
 	return"it works";
 	
     }

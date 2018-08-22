@@ -36,6 +36,9 @@ public class ArticleService {
     }
     
     public List<Article> getListByCategory(Long id){
-	return dao.getAticleList(id);
+	return dao.getAticleListByCategory(id);
+    }
+    public List<Article> getList(){
+	return dao.getArticleList();
     }
 }

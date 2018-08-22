@@ -1,6 +1,7 @@
 package pl.coderslab.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,9 @@ public class ArticleService {
 
     public void deleteArticle(Article article) {
 	dao.deleteArticle(article);
+    }
+    
+    public List<Article> getListByCategory(Long id){
+	return dao.getAticleList(id);
     }
 }

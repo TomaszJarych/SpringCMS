@@ -2,6 +2,7 @@ package pl.coderslab.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,13 @@ public class ArticleService {
 	return dao.getAticleListByCategory(id);
     }
     public List<Article> getList(){
-	return dao.getArticleList();
+	List<Article> list = dao.getArticleList();
+	list.stream().forEachOrdered(article -> article.setContent(cutContnent(article.getContent())));
+	
+	return list;
+    }
+    
+    public String cutContnent(String string) {
+	return (string.length() >200)? string.substring(0, 200)+"...": string;
     }
 }

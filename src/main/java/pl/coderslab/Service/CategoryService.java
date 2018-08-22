@@ -1,5 +1,7 @@
 package pl.coderslab.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import pl.coderslab.DAO.CategoryDAO;
@@ -29,5 +31,9 @@ public class CategoryService {
 
     public void deleteCategory(Category category) {
 	dao.deleteCategory(category);
+    }
+    
+    public List<Category> getCategoryList(){
+	return dao.getCategoryList();
     }
 }

@@ -3,108 +3,115 @@ package pl.coderslab.DTO;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArticleDTO {
 
-    private Long id;
+  private Long id;
 
-    private String title;
+  private String title;
 
-    private AuthorDTO author;
+  private AuthorDTO author;
 
-    private List<CategoryDTO> categories = new ArrayList<>();
-    
-    private String content;
+  private List<CategoryDTO> categories = new ArrayList<>();
 
-    private LocalDateTime created;
+  private String content;
 
-    private LocalDateTime updated;
+  private LocalDateTime created;
 
-    public ArticleDTO(Long id, String title, AuthorDTO author, List<CategoryDTO> categories, String content,
-	    LocalDateTime updated) {
-	this.id = id;
-	this.title = title;
-	this.author = author;
-	this.categories = categories;
-	this.content = content;
-	this.updated = updated;
-    }
+  private LocalDateTime updated;
 
-    public ArticleDTO(String title, AuthorDTO author, List<CategoryDTO> categories, String content,
-	    LocalDateTime updated) {
-	this.title = title;
-	this.author = author;
-	this.categories = categories;
-	this.content = content;
-	this.updated = updated;
-    }
+  public ArticleDTO(
+      Long id,
+      String title,
+      AuthorDTO author,
+      List<CategoryDTO> categories,
+      String content,
+      LocalDateTime updated) {
+    this.id = id;
+    this.title = title;
+    this.author = author;
+    this.categories = categories;
+    this.content = content;
+    this.updated = updated;
+  }
 
-    public ArticleDTO() {
-    }
+  public ArticleDTO(
+      String title,
+      AuthorDTO author,
+      List<CategoryDTO> categories,
+      String content,
+      LocalDateTime updated) {
+    this.title = title;
+    this.author = author;
+    this.categories = categories;
+    this.content = content;
+    this.updated = updated;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public ArticleDTO() {}
 
-    public String getTitle() {
-        return title;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public AuthorDTO getAuthor() {
-        return author;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public List<CategoryDTO> getCategories() {
-        return categories;
-    }
+  public AuthorDTO getAuthor() {
+    return author;
+  }
 
-    public String getContent() {
-        return content;
-    }
+  public List<CategoryDTO> getCategories() {
+    return categories;
+  }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
+  public LocalDateTime getCreated() {
+    return created;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public LocalDateTime getUpdated() {
+    return updated;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setAuthor(AuthorDTO author) {
-        this.author = author;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setCategories(List<CategoryDTO> categories) {
-        this.categories = categories;
-    }
+  public void setAuthor(AuthorDTO author) {
+    this.author = author;
+  }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+  public void setCategories(List<CategoryDTO> categories) {
+    this.categories = categories;
+  }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
+  public void setContent(String content) {
+    this.content = content;
+  }
 
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
+  public void setCreated(LocalDateTime created) {
+    this.created = created;
+  }
 
-    @Override
-    public String toString() {
-	return "ArticleDTO [id=" + id + ", title=" + title + ", author=" + author + ", categories=" + categories
-		+ ", content=" + content + ", created=" + created + ", updated=" + updated + "]";
-    }
+  public void setUpdated(LocalDateTime updated) {
+    this.updated = updated;
+  }
 
-    
-    
+  public String getAllCategories() {
+    return categories.stream().map(el -> el.getName()).collect(Collectors.joining(","));
+  }
 
+  public String getShortenContent() {
+    return (this.content.length() > 200) ? this.content.substring(0, 200) + "..." : this.content;
+  }
 }

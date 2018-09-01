@@ -74,23 +74,23 @@
 		<a href="../categories">Category list</a>
 		<a href="../authors/list">Author list</a>
 		<a href="../authors/add">Add new Author</a>
-		<a href="../categories/add">Add new Category</a>
+		<a href="categories/add">Add new Category</a>
 </h3>
 
-	<h1 align="center">Author list:</h1>
+	<h1 align="center">Category list:</h1>
 
 	<table class="tg" align="center">
 		<tr>
-			<th class="tg-kiyi">First name:</th>
-			<th class="tg-kiyi">Last name:</th>
+			<th class="tg-kiyi">Name:</th>
+			<th class="tg-kiyi">Description:</th>
 			<th class="tg-g3xm">Action</th>
 		</tr>
-		<c:forEach items="${authors }" var="author">
+		<c:forEach items="${categories }" var="category">
 			<tr>
-				<td align="center" class="tg-phtq">${author.firstName}</td>
-				<td align="center" class="tg-phtq">${author.lastName}</td>
-				<td align="center" class="tg-hmp3"><a href="update/${author.id}">Edit</a>
-					| <a href="delete/${author.id}"> Delete</a></td>
+				<td align="center" class="tg-phtq">${category.name}</td>
+				<td align="center" class="tg-phtq">${category.description}</td>
+				<td align="center" class="tg-hmp3"><a href="categories/update/${category.id}">Edit</a>
+					| <a href="categories/delete/${category.id}"> Delete</a></td>
 			</tr>
 		</c:forEach>
 </body>

@@ -19,17 +19,18 @@ public class CategoryServiceDTO {
     this.dao = dao;
   }
 
-  public Category addCategory(Category category) {
-    dao.addCategory(category);
-    return category;
+  public CategoryDTO addCategory(CategoryDTO dto) {
+    return dao.addCategory(toEntity(dto)).toDto();
   }
 
-  public Category getCategoryByID(Long id) {
-    return dao.getCategoryByID(id);
+  public CategoryDTO getCategoryByID(Long id) {
+    return dao.getCategoryByID(id).toDto();
   }
 
-  public void updateCategory(Category category) {
+  public CategoryDTO updateCategory(CategoryDTO dto) {
+    Category category = toEntity(dto);
     dao.updateCategory(category);
+    return category.toDto();
   }
 
   public void deleteCategory(Long id) {
@@ -39,8 +40,6 @@ public class CategoryServiceDTO {
   public List<CategoryDTO> getCategoryList() {
     return dao.getCategoryList().stream().map(Category::toDto).collect(Collectors.toList());
   }
-  
- 
 
   private Category toEntity(CategoryDTO dto) {
     Category category;

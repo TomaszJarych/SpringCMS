@@ -50,4 +50,10 @@ public class ArticleDAO {
 	return books;
     }
     
+    public List<Article> getAllArticles() {
+	Query query = entityManager.createQuery(" SELECT a FROM Article a order by a.created desc");
+	List<Article> books = query.getResultList();
+	return books;
+    }
+    
 }

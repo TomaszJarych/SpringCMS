@@ -3,6 +3,7 @@ package pl.coderslab.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import pl.coderslab.DTO.ArticleDTO;
 
 @Entity
 @Table(name = "articles")
@@ -114,5 +117,21 @@ public class Article {
     public void addCategory(Category category) {
 	categories.add(category);
     }
+    
+   public ArticleDTO  toDto() {
+       ArticleDTO dto = new ArticleDTO();
+       dto.setId(getId());
+       dto.setTitle(getTitle());
+       dto.setAuthor(getAuthor().toDto());
+       dto.setContent(getContent());
+       dto.setCreated(getCreated());
+       dto.setUpdated(getUpdated());
+       if (Objects.nonNull(getCategories()) && !getCategories().isEmpty()) {
+	   dto.getCategories().clear();
+	   getCategories().stream().map(Category::toDto).forEach(el-> dto.getCategories().add(el));
+    }
+       return dto;
+       
+   }
 
 }

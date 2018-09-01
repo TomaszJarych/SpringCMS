@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import pl.coderslab.DTO.CategoryDTO;
+
 @Entity
 @Table(name = "category")
 public class Category {
@@ -56,6 +58,13 @@ public class Category {
     @Override
     public String toString() {
 	return "Category [id=" + id + ", name=" + name + ", description=" + description + "]";
+    }
+    
+    public CategoryDTO toDto() {
+	
+	return new CategoryDTO(getId(), getName(), getDescription());
+	
+	
     }
 
 }

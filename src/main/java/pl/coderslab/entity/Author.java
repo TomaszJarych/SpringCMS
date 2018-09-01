@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import pl.coderslab.DTO.AuthorDTO;
+
 @Entity
 @Table(name = "author")
 public class Author {
@@ -57,6 +59,12 @@ public class Author {
     @Override
     public String toString() {
 	return "Author [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+    }
+    
+    public AuthorDTO toDto() {
+	
+	return new AuthorDTO(getId(), getFirstName(), getLastName());
+	
     }
 
 }

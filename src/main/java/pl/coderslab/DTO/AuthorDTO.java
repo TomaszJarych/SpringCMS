@@ -50,6 +50,10 @@ public class AuthorDTO {
     public String toString() {
 	return "AuthorDTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
+    
+    public String getFullName() {
+	return firstName+" "+lastName;
+    }
 
     
     

@@ -32,13 +32,11 @@ public class Article {
     @Column(name = "title", length = 200)
     private String title;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-	    CascadeType.REFRESH })
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-	    CascadeType.REFRESH })
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "articles_category", joinColumns = {@JoinColumn(name = "article_id")}, inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private List<Category> categories = new ArrayList<>();
     @Column(name = "content")

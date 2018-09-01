@@ -49,11 +49,12 @@
 </head>
 <body>
 
-<a href="../categories">Category list</a>
-		<a href="../authors/list">Author list</a>
-		<a href="../authors/add">Add new Author</a>
-		<a href="../categories/add">Add new Category</a>
-		<a href="***">Add new Article</a>
+		<a href="categories">Category list</a>
+		<a href="articles">Article list</a>
+		<a href="authors/list">Author list</a>
+		<a href="authors/add">Add new Author</a>
+		<a href="categories/add">Add new Category</a>
+		<a href="articles/add">Add new Article</a>
 
 <h1 align="center">Artykuły</h1>
 
@@ -76,7 +77,7 @@
  		<td class="tg-0pky">${article.getShortenContent()}</td>
  		<td class="tg-0pky">${article.getAllCategories()}</td>
  		
- 		<td class="tg-0pky"><a href="***/${article.getId()}">Szczegóły</a> | <a href="***/${article.getId()}">Usuń</a></td>
+ 		<td class="tg-0pky"><a href="articles/update/${article.getId()}">Edytuj</a> | <a href="articles/delete/${article.getId()}">Usuń</a></td>
  	</tr>
  </c:forEach>
 </table>

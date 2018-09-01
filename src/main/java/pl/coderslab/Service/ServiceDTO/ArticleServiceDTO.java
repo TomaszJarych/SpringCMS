@@ -2,11 +2,10 @@ package pl.coderslab.Service.ServiceDTO;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.coderslab.DAO.ArticleDAO;
@@ -22,8 +21,11 @@ public class ArticleServiceDTO {
   AuthorDAO authorDAO;
   CategoryDAO categoryDAO;
 
-  public ArticleServiceDTO(ArticleDAO dao) {
+  @Autowired
+  public ArticleServiceDTO(ArticleDAO dao, AuthorDAO authorDAO, CategoryDAO categoryDAO) {
     this.dao = dao;
+    this.authorDAO = authorDAO;
+    this.categoryDAO = categoryDAO;
   }
 
   public ArticleDTO addArticle(ArticleDTO dto) {
@@ -60,9 +62,7 @@ public class ArticleServiceDTO {
 
   public Collection<ArticleDTO> getAllArticles() {
 
-    return dao.getAllArticles().stream()
-	    .map(Article::toDto)
-	    .collect(Collectors.toList());
+    return dao.getAllArticles().stream().map(Article::toDto).collect(Collectors.toList());
   }
 
   public String cutContnent(String string) {
@@ -79,7 +79,7 @@ public class ArticleServiceDTO {
     }
 
     article.setTitle(dto.getTitle());
-    article.setAuthor(authorDAO.getAuthorByID(dto.getAuthor().getId()));
+    article.setAuthor(authorDAO.getAuthorByID(1L));
     article.setContent(dto.getContent());
     if (dto.getUpdated() != null) {
       article.setUpdated(dto.getUpdated());

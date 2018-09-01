@@ -49,7 +49,10 @@ public class ArticleDTO {
     this.updated = updated;
   }
 
-  public ArticleDTO() {}
+  public ArticleDTO() {
+      
+      created = LocalDateTime.now();
+  }
 
   public Long getId() {
     return id;
@@ -113,5 +116,24 @@ public class ArticleDTO {
 
   public String getShortenContent() {
     return (this.content.length() > 200) ? this.content.substring(0, 200) + "..." : this.content;
+  }
+
+  @Override
+  public String toString() {
+    return "ArticleDTO [id="
+        + id
+        + ", title="
+        + title
+        + ", author="
+        + author
+        + ", categories="
+        + categories
+        + ", content="
+        + content
+        + ", created="
+        + created
+        + ", updated="
+        + updated
+        + "]";
   }
 }

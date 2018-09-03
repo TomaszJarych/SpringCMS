@@ -1,9 +1,16 @@
 package pl.coderslab.DTO;
 
+
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class CategoryDTO {
 
     private Long id;
 
+    @NotBlank
+    @Size(min=5)
     private String name;
 
     private String description;

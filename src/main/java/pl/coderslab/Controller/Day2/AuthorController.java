@@ -2,9 +2,12 @@ package pl.coderslab.Controller.Day2;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,38 +42,41 @@ public class AuthorController {
   }
 
   @RequestMapping(path = "/add", method = RequestMethod.POST)
-  public String processAddForm(@ModelAttribute("author") AuthorDTO dto) {
-
-    authorServiceDTO.addAuthor(dto);
-
-    return "redirect:/authors/list";
-  }
-  
-  @RequestMapping(path = "/update/{id}", method = RequestMethod.GET)
-  public String updateAuthorForm(@PathVariable("id")Long id, Model model) {
-      
-      model.addAttribute("author", authorServiceDTO.getAuthorByID(id));
-      
+  public String processAddForm(
+      @Valid @ModelAttribute("author") AuthorDTO dto, BindingResult result) {
+    if (result.hasErrors()) {
       return "authorForm";
-
+    } else {
+      authorServiceDTO.addAuthor(dto);
+      return "redirect:/authors/list";
+    }
   }
-  
-  @RequestMapping(path = "/update/**", method = RequestMethod.POST)
-  public String updateAuthorForm(@ModelAttribute("author") AuthorDTO dto) {
 
-      authorServiceDTO.updateAuthor(dto);
-      
-    return "redirect:/authors/list";
+  @RequestMapping(path = "/update/{id}", method = RequestMethod.GET)
+  public String updateAuthorForm(@PathVariable("id") Long id, Model model) {
+
+    model.addAttribute("author", authorServiceDTO.getAuthorByID(id));
+
+    return "authorForm";
+  }
+
+  @RequestMapping(path = "/update/**", method = RequestMethod.POST)
+  public String updateAuthorForm(@Valid @ModelAttribute("author") AuthorDTO dto, BindingResult result) {
+      if (result.hasErrors()) {
+	  
+	      return "authorForm";
+	    } else {
+	      authorServiceDTO.updateAuthor(dto);
+	      return "redirect:/authors/list";
+	    }
   }
 
   @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
-  public String deleteAuthor(@PathVariable("id")Long id) {
-      
-      
-      authorServiceDTO.deleteAuthor(id);
-      
-      return "redirect:/authors/list";
-      
+  public String deleteAuthor(@PathVariable("id") Long id) {
+
+    authorServiceDTO.deleteAuthor(id);
+
+    return "redirect:/authors/list";
   }
 
   @ModelAttribute("authors")

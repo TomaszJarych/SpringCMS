@@ -1,11 +1,15 @@
 package pl.coderslab.DTO;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class AuthorDTO {
     
     private Long id;
     
+    @NotBlank
     private String firstName;
     
+    @NotBlank
     private String lastName;
 
     public AuthorDTO(Long id, String firstName, String lastName) {

@@ -5,16 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import pl.coderslab.Validator.ArticleIsValid;
+@ArticleIsValid(contentMinLength=500, titleMaxLength=200)
 public class ArticleDTO {
 
   private Long id;
 
+  @NotBlank
+  @Size(max =200)
   private String title;
 
   private AuthorDTO author;
 
+  @NotNull
+  @NotEmpty
   private List<CategoryDTO> categories = new ArrayList<>();
 
+  @Size(min=500)
   private String content;
 
   private LocalDateTime created;

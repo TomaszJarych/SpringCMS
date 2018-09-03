@@ -64,6 +64,12 @@ public class ArticleServiceDTO {
 
     return dao.getAllArticles().stream().map(Article::toDto).collect(Collectors.toList());
   }
+  
+  public Collection<ArticleDTO> getAllDrafts() {
+
+      return dao.getAllDrafts().stream().map(Article::toDto).collect(Collectors.toList());
+    }
+
 
   public String cutContnent(String string) {
     return (string.length() > 200) ? string.substring(0, 200) + "..." : string;
@@ -84,6 +90,7 @@ public class ArticleServiceDTO {
     if (dto.getUpdated() != null) {
       article.setUpdated(dto.getUpdated());
     }
+    article.setDraft(dto.isDraft());
     if (Objects.nonNull(dto.getCategories()) && !dto.getCategories().isEmpty()) {
       article.getCategories().clear();
       dto.getCategories()

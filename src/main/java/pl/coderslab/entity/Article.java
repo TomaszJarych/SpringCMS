@@ -45,6 +45,8 @@ public class Article {
     private final LocalDateTime created = LocalDateTime.now();
 
     private LocalDateTime updated;
+    
+    private boolean draft;
 
     public Article(String title, String content) {
 	this.title = title;
@@ -105,8 +107,16 @@ public class Article {
     public void setUpdated(LocalDateTime updated) {
 	this.updated = updated;
     }
+    
+    
 
-    @Override
+    public boolean isDraft() {
+  return draft;}
+
+  public void setDraft(boolean draft) {
+  this.draft = draft;}
+
+  @Override
     public String toString() {
 	return "Article [id=" + id + ", title=" + title + ", author=" + author + ", categories=" + categories
 		+ ", content=" + content + ", created=" + created + ", updated=" + updated + "]";
@@ -124,6 +134,7 @@ public class Article {
        dto.setContent(getContent());
        dto.setCreated(getCreated());
        dto.setUpdated(getUpdated());
+       dto.setDraft(isDraft());
        if (Objects.nonNull(getCategories()) && !getCategories().isEmpty()) {
 	   dto.getCategories().clear();
 	   getCategories().stream().map(Category::toDto).forEach(el-> dto.getCategories().add(el));

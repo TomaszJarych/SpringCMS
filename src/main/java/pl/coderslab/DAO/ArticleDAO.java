@@ -51,7 +51,13 @@ public class ArticleDAO {
     }
     
     public List<Article> getAllArticles() {
-	Query query = entityManager.createQuery(" SELECT a FROM Article a order by a.created desc");
+	Query query = entityManager.createQuery(" SELECT a FROM Article a WHERE a.draft = false order by a.created desc");
+	List<Article> books = query.getResultList();
+	return books;
+    }
+    
+    public List<Article> getAllDrafts() {
+	Query query = entityManager.createQuery(" SELECT a FROM Article a WHERE a.draft = true order by a.created desc");
 	List<Article> books = query.getResultList();
 	return books;
     }

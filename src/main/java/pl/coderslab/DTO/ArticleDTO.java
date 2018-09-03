@@ -5,34 +5,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import pl.coderslab.Validator.ArticleIsValid;
-@ArticleIsValid(contentMinLength=500, titleMaxLength=200)
+import pl.coderslab.Validator.Groups.IsDraft;
+
+@ArticleIsValid(contentMinLength = 500, titleMaxLength = 200, groups=Default.class)
 public class ArticleDTO {
 
   private Long id;
 
-  @NotBlank
-  @Size(max =200)
+  @NotBlank(groups= {Default.class, IsDraft.class})
+  @Size(max = 200,groups= {Default.class, IsDraft.class})
   private String title;
-
+  
   private AuthorDTO author;
 
-  @NotNull
-  @NotEmpty
+  @NotNull(groups=Default.class)
+  @NotEmpty(groups=Default.class) 
   private List<CategoryDTO> categories = new ArrayList<>();
 
-  @Size(min=500)
+  @Size(min = 500, groups= {Default.class, IsDraft.class})
   private String content;
 
   private LocalDateTime created;
 
   private LocalDateTime updated;
+
+  @AssertFalse(groups=Default.class)
+  @AssertTrue(groups=IsDraft.class)
+  private boolean draft;
 
   public ArticleDTO(
       Long id,
@@ -63,8 +72,8 @@ public class ArticleDTO {
   }
 
   public ArticleDTO() {
-      
-      created = LocalDateTime.now();
+
+    created = LocalDateTime.now();
   }
 
   public Long getId() {
@@ -121,6 +130,14 @@ public class ArticleDTO {
 
   public void setUpdated(LocalDateTime updated) {
     this.updated = updated;
+  }
+
+  public boolean isDraft() {
+    return draft;
+  }
+
+  public void setDraft(boolean draft) {
+    this.draft = draft;
   }
 
   public String getAllCategories() {

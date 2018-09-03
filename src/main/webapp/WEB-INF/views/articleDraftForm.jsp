@@ -15,11 +15,11 @@
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Article form</title>
+<title>Article draft form</title>
 </head>
 <body>
 
-	<h1 align="center">Article:</h1>
+	<h1 align="center">Article draft:</h1>
 
 	<form:form method="post" modelAttribute="article" action="add">
 
@@ -29,21 +29,8 @@
 			<form:input path="title" />
 			<form:errors path="title" cssClass="errors" />
 		</h2>
-			<h2>Is draft? <form:checkbox	path="draft"/>
+		<h2>Is draft? <form:checkbox	path="draft"/>
 			<form:errors path="draft" cssClass="errors" /></h2>
-		<div>
-			<h2>Author:</h2>
-			<form:select path="author">
-				<form:options items="${authors}" itemValue="id" itemLabel="fullName" />
-			</form:select>
-		</div>
-		<div>
-			<h2>Category:</h2>
-			<form:select path="categories" multiple="true">
-				<form:options items="${categories}" itemValue="id" itemLabel="name" />
-			</form:select>
-				<form:errors path="categories" cssClass="errors" />
-		</div>
 		<h2 align="center">
 			Content
 			<form:textarea path="content" rows="20" cols="120" />

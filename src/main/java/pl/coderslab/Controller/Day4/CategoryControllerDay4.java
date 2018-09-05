@@ -14,16 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.coderslab.DTO.CategoryDTO;
+import pl.coderslab.Service.Day4.CategoryServiceDay4;
 import pl.coderslab.Service.ServiceDTO.CategoryServiceDTO;
 
 @Controller
 @RequestMapping("/day4/category")
 public class CategoryControllerDay4 {
 
-  private final CategoryServiceDTO service;
+  private final CategoryServiceDay4 service;
 
   @Autowired
-  public CategoryControllerDay4(CategoryServiceDTO service) {
+  public CategoryControllerDay4(CategoryServiceDay4 service) {
     this.service = service;
   }
 

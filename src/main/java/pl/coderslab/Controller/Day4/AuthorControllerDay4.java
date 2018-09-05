@@ -14,16 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.coderslab.DTO.AuthorDTO;
+import pl.coderslab.Service.Day4.AuthorServiceDay4;
 import pl.coderslab.Service.ServiceDTO.AuthorServiceDTO;
 
 @Controller
 @RequestMapping("/day4/author")
 public class AuthorControllerDay4 {
 
-  private final AuthorServiceDTO authorServiceDTO;
+  private final AuthorServiceDay4 authorServiceDTO;
 
   @Autowired
-  public AuthorControllerDay4(AuthorServiceDTO authorServiceDTO) {
+  public AuthorControllerDay4(AuthorServiceDay4 authorServiceDTO) {
     this.authorServiceDTO = authorServiceDTO;
   }
 

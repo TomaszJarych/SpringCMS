@@ -19,6 +19,15 @@
 </head>
 <body>
 
+<h1>Menu</h1>
+		<a href="http://localhost:8080/SpringCMS/day4/category">Category list</a>
+		<a href="http://localhost:8080/SpringCMS/day4/category/add">Add new Category</a>
+		<a href="http://localhost:8080/SpringCMS/day4/author/list">Author list</a>
+		<a href="http://localhost:8080/SpringCMS/day4/author/add">Add new Author</a>
+		<a href="http://localhost:8080/SpringCMS/day4/article/list">Article list</a>
+		<a href="http://localhost:8080/SpringCMS/day4/article/add">Add new Article</a>
+</h3>
+
 	<h1 align="center">Article:</h1>
 
 	<form:form method="post" modelAttribute="article" action="add">

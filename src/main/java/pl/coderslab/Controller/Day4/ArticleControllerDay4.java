@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.coderslab.DTO.ArticleDTO;
 import pl.coderslab.DTO.AuthorDTO;
 import pl.coderslab.DTO.CategoryDTO;
+import pl.coderslab.Service.Day4.ArticleServiceDay4;
+import pl.coderslab.Service.Day4.AuthorServiceDay4;
+import pl.coderslab.Service.Day4.CategoryServiceDay4;
 import pl.coderslab.Service.ServiceDTO.ArticleServiceDTO;
 import pl.coderslab.Service.ServiceDTO.AuthorServiceDTO;
 import pl.coderslab.Service.ServiceDTO.CategoryServiceDTO;
@@ -24,21 +27,21 @@ import pl.coderslab.Service.ServiceDTO.CategoryServiceDTO;
 @RequestMapping("/day4/article")
 public class ArticleControllerDay4 {
 
-  private final ArticleServiceDTO articleService;
-  private final AuthorServiceDTO authorService;
-  private final CategoryServiceDTO categoryService;
+  private final ArticleServiceDay4 articleService;
+  private final AuthorServiceDay4 authorService;
+  private final CategoryServiceDay4 categoryService;
 
   @Autowired
   public ArticleControllerDay4(
-      ArticleServiceDTO articleServic,
-      AuthorServiceDTO authorService,
-      CategoryServiceDTO categoryService) {
+      ArticleServiceDay4 articleServic,
+      AuthorServiceDay4 authorService,
+      CategoryServiceDay4 categoryService) {
     this.articleService = articleServic;
     this.authorService = authorService;
     this.categoryService = categoryService;
   }
 
-  @RequestMapping(path = "", method = RequestMethod.GET)
+  @RequestMapping(path = "/list", method = RequestMethod.GET)
   public String showArticles() {
 
     return "articlesList";

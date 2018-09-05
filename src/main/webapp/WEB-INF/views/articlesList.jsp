@@ -49,12 +49,12 @@
 </head>
 <body>
 
-		<a href="categories">Category list</a>
-		<a href="articles">Article list</a>
-		<a href="authors/list">Author list</a>
-		<a href="authors/add">Add new Author</a>
-		<a href="categories/add">Add new Category</a>
-		<a href="articles/add">Add new Article</a>
+		<a href="http://localhost:8080/SpringCMS/day4/category">Category list</a>
+		<a href="http://localhost:8080/SpringCMS/day4/category/add">Add new Category</a>
+		<a href="http://localhost:8080/SpringCMS/day4/author/list">Author list</a>
+		<a href="http://localhost:8080/SpringCMS/day4/author/add">Add new Author</a>
+		<a href="http://localhost:8080/SpringCMS/day4/article/list">Article list</a>
+		<a href="http://localhost:8080/SpringCMS/day4/article/add">Add new Article</a>
 
 <h1 align="center">Artykuły</h1>
 

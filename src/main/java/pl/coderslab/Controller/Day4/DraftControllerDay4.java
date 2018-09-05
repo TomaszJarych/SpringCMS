@@ -1,13 +1,12 @@
-package pl.coderslab.Controller.Day2;
+package pl.coderslab.Controller.Day4;
 
 import java.util.Collection;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,17 +18,18 @@ import pl.coderslab.DTO.CategoryDTO;
 import pl.coderslab.Service.ServiceDTO.ArticleServiceDTO;
 import pl.coderslab.Service.ServiceDTO.AuthorServiceDTO;
 import pl.coderslab.Service.ServiceDTO.CategoryServiceDTO;
+import pl.coderslab.Validator.Groups.IsDraft;
 
 @Controller
-@RequestMapping("/articles")
-public class ArticleController {
+@RequestMapping("/day4/dratf")
+public class DraftControllerDay4 {
 
   private final ArticleServiceDTO articleService;
   private final AuthorServiceDTO authorService;
   private final CategoryServiceDTO categoryService;
 
   @Autowired
-  public ArticleController(
+  public DraftControllerDay4(
       ArticleServiceDTO articleServic,
       AuthorServiceDTO authorService,
       CategoryServiceDTO categoryService) {
@@ -41,7 +41,7 @@ public class ArticleController {
   @RequestMapping(path = "", method = RequestMethod.GET)
   public String showArticles() {
 
-    return "articlesList";
+    return "articlesDraftList";
   }
 
   @RequestMapping(path = "/add", method = RequestMethod.GET)
@@ -49,20 +49,20 @@ public class ArticleController {
 
     model.addAttribute("article", new ArticleDTO());
 
-    return "articleForm";
+    return "articleDraftForm";
   }
 
   @RequestMapping(path = "/add", method = RequestMethod.POST)
   public String processArticleForm(
-      @Valid @ModelAttribute("article") ArticleDTO dto, BindingResult result) {
+      @Validated(IsDraft.class) @ModelAttribute("article") ArticleDTO dto, BindingResult result) {
 
     if (result.hasErrors()) {
 
-      return "articleForm";
+      return "articleDraftForm";
 
     } else {
       articleService.addArticle(dto);
-      return "redirect:/articles";
+      return "redirect:/draft";
     }
   }
 
@@ -71,19 +71,19 @@ public class ArticleController {
 
     model.addAttribute("article", articleService.getArticleByID(id));
 
-    return "articleForm";
+    return "articleDraftForm";
   }
 
   @RequestMapping(path = "/update/**", method = RequestMethod.POST)
-  public String processUpdateArticleForm(
-      @Valid @ModelAttribute("article") ArticleDTO dto, BindingResult result) {
+  public String processUpdateArticleForm(@Validated(IsDraft.class)
+      @ModelAttribute("article") ArticleDTO dto, BindingResult result) {
     if (result.hasErrors()) {
 
-      return "articleForm";
+      return "articleDraftForm";
 
     } else {
       articleService.updateArticle(dto);
-      return "redirect:/articles";
+      return "redirect:/draft";
     }
   }
 
@@ -92,13 +92,13 @@ public class ArticleController {
 
     articleService.deleteArticle(id);
 
-    return "redirect:/articles";
+    return "redirect:/draft";
   }
 
   @ModelAttribute("articles")
   public Collection<ArticleDTO> getAllArticles() {
 
-    return articleService.getAllArticles();
+    return articleService.getAllDrafts();
   }
 
   @ModelAttribute("authors")

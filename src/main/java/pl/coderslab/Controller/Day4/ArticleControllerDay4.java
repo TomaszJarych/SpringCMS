@@ -1,4 +1,4 @@
-package pl.coderslab.Controller.Day2;
+package pl.coderslab.Controller.Day4;
 
 import java.util.Collection;
 
@@ -21,15 +21,15 @@ import pl.coderslab.Service.ServiceDTO.AuthorServiceDTO;
 import pl.coderslab.Service.ServiceDTO.CategoryServiceDTO;
 
 @Controller
-@RequestMapping("/articles")
-public class ArticleController {
+@RequestMapping("/day4/article")
+public class ArticleControllerDay4 {
 
   private final ArticleServiceDTO articleService;
   private final AuthorServiceDTO authorService;
   private final CategoryServiceDTO categoryService;
 
   @Autowired
-  public ArticleController(
+  public ArticleControllerDay4(
       ArticleServiceDTO articleServic,
       AuthorServiceDTO authorService,
       CategoryServiceDTO categoryService) {

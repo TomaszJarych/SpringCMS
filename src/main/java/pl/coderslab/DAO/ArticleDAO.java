@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import pl.coderslab.entity.Article;
-import pl.coderslab.entity.Category;
 
 @Component
 @Transactional
